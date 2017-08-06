@@ -85,6 +85,10 @@ include('/scripts/connect.php');
 				$name = $row['name'];
 				$notes = $row['notes'];
 				$complete = $row['complete'];
+				
+				echo "<div class=\"container\" style=\"width:150px;height:150px;\">";
+				echo "<p>".$name."</p>"
+				echo "</div>";
 			}
 		?>
     </div>
