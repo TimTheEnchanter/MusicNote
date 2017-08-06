@@ -64,9 +64,7 @@ include('/scripts/connect.php');
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-                        <h1>Music Notes</h1>
-                        <hr class="small">
-                        <span class="subheading">Something to help keep track of my music.</span>
+                        <h1>Albums</h1>
                     </div>
                 </div>
             </div>
@@ -76,7 +74,8 @@ include('/scripts/connect.php');
     <!-- Main Content -->
     <div class="container">
         <?php
-			$query = "SELECT * from AlbumNote";
+			$albumId = $_GET['id'];
+			$query = "SELECT * from AlbumNote WHERE id = ".$albumId."";
 			$result = mysqli_query($db, $query);
 			if(!$result) die("db error " . mysqli_error($cn));
 
@@ -86,9 +85,20 @@ include('/scripts/connect.php');
 				$notes = $row['notes'];
 				$complete = $row['complete'];
 				
-				echo "<a href=\"albums.php?id=".$id."\"><div class=\"container\" style=\"width:150px;height:150px;\">";
+				if($complete == 1)
+				{
+					$isComplete = "Yes";
+				}
+				else
+				{
+					$isComplete = "No";
+				}
+				
+				echo "<div class=\"container\">";
 				echo "<p>".$name."</p>"
-				echo "</div></a>";
+				echo "<p>".$notes."</p>"
+				echo "<p>Complete:".$isComplete."</p>"
+				echo "</div>";
 			}
 		?>
     </div>
